@@ -13,7 +13,8 @@ createPuzzleButton.addEventListener('click', scramble(sentence))
 
 
 
-// This returns a random object at the selected difficulty level
+// This returns a random puzzle object at the selected difficulty level
+// This function calls makString on that puzzle object
 function makeCallToApi() {  
     fetch(puzzlesUrl)
     .then(resp => resp.json())
@@ -28,19 +29,20 @@ function makeCallToApi() {
             }
         })
         let puzzleObject = array[Math.floor(Math.random() * array.length)];
-        return puzzleObject
+        makeString(puzzleObject)
     })
 };
 
-// This returns a crypto-valid array of letters given an object.
-function makeString(object) {
-    debugger
-}
-
-
-
+// This returns a string given a puzzle object.
+// The function calls scramble on that string.
+function makeString(puzzleObject) {
+    solution = puzzleObject.attributes.solution
+    scramble(solution)
+};
 
 // This returns a crypto-valid array of letters given a string.
+// The solution is currently printing to the console.
+// The crypto-valid array is appended to the DOM.
 function scramble(sentence) {
     let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     let sentenceArray = []
@@ -59,5 +61,6 @@ function scramble(sentence) {
         scrambledSentence.push(character);
     }
     });
-    puzzleSpace.innerText = scrambledSentence
-}
+    puzzleSpace.innerText = scrambledSentence.join('')
+    console.log(sentenceArray.join(''))
+};
