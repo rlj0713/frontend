@@ -7,11 +7,13 @@ const createPuzzleButton = document.getElementById("submit-puzzle")
 
 let puzzleSpace = document.getElementById("interactive-puzzle")
 
+// The Generate Random Puzzle Button calls getPuzzle() based on selected difficulty
 randomPuzzleButton.addEventListener("click", function(e) {
     e.preventDefault()
     getPuzzle()
 });
 
+// The Create Puzzle Button calls scramble() on the user input
 createPuzzleButton.addEventListener('click', function(e) {
     e.preventDefault()
     scramble()
@@ -48,14 +50,13 @@ function makeString(puzzleObject) {
 // This returns a crypto-valid array of letters given a string.
 // The solution is currently printing to the console.
 // The crypto-valid array is appended to the DOM.
-function scramble() {
-    let userSubmittedString = document.querySelector("#puzzle-solutiion").value
+function scramble(input) {
+    let userSubmittedString = document.querySelector("#puzzle-solutiion").value || input
     let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     let sentenceArray = []
     let scrambledSentence = []
     let letters = /\w/
     let randomNumber = Math.floor(Math.random() * 26) || 1
-
 
     userSubmittedString = userSubmittedString.toUpperCase();
     sentenceArray = userSubmittedString.split("");
