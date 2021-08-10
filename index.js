@@ -71,6 +71,8 @@ function scramble(input) {
     createLetterForms(scrambledSentence, userSubmittedString)
 };
 
+// Given 2 arrays - solution + scrambled, this updates the DOM with input fields
+// Each input field has an ID that matches the solution letter
 function createLetterForms(arrayOfLetters, solution) {
     solutionArray = solution.split('')
     console.log(`Solution: ${solution}`)
@@ -79,24 +81,19 @@ function createLetterForms(arrayOfLetters, solution) {
     let interactArea = document.querySelector("#interact-area")
     interactArea.innerHTML = ""
     
-    // let cleanSolution = []
-    // solutionArray.forEach(letter => {
-    //     if (letter.match(/\w/)) {
-    //         cleanSolution.push(letter)
-    //     }
-    // })
-    
+    let i = 0
     solutionArray.forEach(letter => {
         if (letter.match(/\w/)) {
             let letterForm = `<form id=${letter} class="letters"><input size="1" type="text" name="letters" id="letters"></form>`
             interactArea.innerHTML += letterForm
+            i += 1
         } else {
             interactArea.innerHTML += `${letter}`
+            i += 1
+        }
+        if (i % 30 == 0) {
+            interactArea.innerHTML += "<br>"
         }
     })
-    
-    
-    
-    
-    // puzzleArea.appendChild.innerText = "hello"
+
 }
