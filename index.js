@@ -79,16 +79,20 @@ function createLetterForms(arrayOfLetters, solution) {
     let interactArea = document.querySelector("#interact-area")
     interactArea.innerHTML = ""
     
-    let cleanSolution = []
+    // let cleanSolution = []
+    // solutionArray.forEach(letter => {
+    //     if (letter.match(/\w/)) {
+    //         cleanSolution.push(letter)
+    //     }
+    // })
+    
     solutionArray.forEach(letter => {
         if (letter.match(/\w/)) {
-            cleanSolution.push(letter)
+            let letterForm = `<form id=${letter} class="letters"><input size="1" type="text" name="letters" id="letters"></form>`
+            interactArea.innerHTML += letterForm
+        } else {
+            interactArea.innerHTML += `${letter}`
         }
-    })
-    
-    cleanSolution.forEach(letter => {
-        let letterForm = `<form id=${letter} class="letters"><input size="1" type="text" name="letters" id="letters"></form>`
-        interactArea.innerHTML += letterForm
     })
     
     
