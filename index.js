@@ -67,7 +67,6 @@ function scramble(input) {
     }
     });
     puzzleSpace.innerText = scrambledSentence.join('')
-    console.log(sentenceArray.join(''))
     createLetterForms(scrambledSentence, userSubmittedString)
 };
 
