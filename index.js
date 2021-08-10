@@ -85,7 +85,8 @@ function createLetterForms(arrayOfLetters, solution) {
     solutionArray.forEach(letter => {
         if (letter.match(/\w/)) {
             let letterForm = `<form id=${letter} class="letters"><input size="1" type="text" name="letters" id="letters"></form>`
-            interactArea.innerHTML += letterForm
+            interactArea.innerHTML += letterForm;
+            addLetterListener(letter)                        
             i += 1
         } else {
             interactArea.innerHTML += `${letter}`
@@ -93,27 +94,17 @@ function createLetterForms(arrayOfLetters, solution) {
         }
         if (i % 30 == 0) {
             interactArea.innerHTML += "<br>"
-        }
+        }    
     })
-    loadPuzzleListeners()
+    
 }
 
-// Correct key-up strokes print "hooray" to the console 
-function loadPuzzleListeners () {
-    firstField = document.querySelector("#A")
-    firstField.addEventListener("keyup", function(e) {
-        e.preventDefault()
-        if (checkInput(event.keyCode, firstField) == true) {
-            console.log("hooray")
-        }
-    });
-}
-
-// This returns T/F based on puzzle field & input
-function checkInput(input, field) {
-    if (field.id == String.fromCharCode(input)) {
-        return true
-    } else {
-        return false
-    }
+function addLetterListener(letter) {
+    document.querySelectorAll('.letters').forEach(letter => {
+        letter.addEventListener('keyup', event => {
+            if (letter.id == String.fromCharCode(event.keyCode)) {
+                console.log("hooray")
+            }
+        })
+    })
 }
