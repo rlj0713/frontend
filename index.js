@@ -19,7 +19,6 @@ createPuzzleButton.addEventListener('click', function(e) {
     scramble()
 });
 
-
 // This returns a random puzzle object at the selected difficulty level
 // This function calls makString on that puzzle object
 function getPuzzle() { 
@@ -35,7 +34,6 @@ function getPuzzle() {
             }
         })
         let puzzleObject = array[Math.floor(Math.random() * array.length)];
-        console.log(selectedDifficutly)
         makeString(puzzleObject)
     })
 };
@@ -70,4 +68,29 @@ function scramble(input) {
     });
     puzzleSpace.innerText = scrambledSentence.join('')
     console.log(sentenceArray.join(''))
+    createLetterForms(scrambledSentence)
 };
+
+function createLetterForms(arrayOfLetters) {
+    console.log(arrayOfLetters)
+    let puzzleArea = document.getElementById('puzzle-area')
+    let letterForm = `<form id="letters" class="letters"><input size="1" type="text" name="letters" id="letters"></form>`
+    let interactArea = document.querySelector("#interact-area")
+    interactArea.innerHTML = ""
+
+    let cleanArray = []
+    arrayOfLetters.forEach(letter => {
+        if (letter.match(/\w/)) {
+            cleanArray.push(letter)
+        }
+    })
+
+    cleanArray.forEach(letter => {
+        interactArea.innerHTML += letterForm
+    })
+    
+    
+    
+    
+    // puzzleArea.appendChild.innerText = "hello"
+}
