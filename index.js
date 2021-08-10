@@ -72,7 +72,7 @@ function scramble(input) {
 
 // Given 2 arrays - solution + scrambled, this updates the DOM with input fields
 // Each input field has an ID that matches the solution letter
-// Event listeners for the puzzle are activated
+// Event listeners for each field print "hooray to the screen"
 function createLetterForms(arrayOfLetters, solution) {
     solutionArray = solution.split('')
     console.log(`Solution: ${solution}`)
@@ -99,6 +99,7 @@ function createLetterForms(arrayOfLetters, solution) {
     
 }
 
+// This adds an event listener to a letter field given a letter
 function addLetterListener(letter) {
     document.querySelectorAll('.letters').forEach(letter => {
         letter.addEventListener('keyup', event => {
