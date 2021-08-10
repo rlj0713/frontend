@@ -68,24 +68,26 @@ function scramble(input) {
     });
     puzzleSpace.innerText = scrambledSentence.join('')
     console.log(sentenceArray.join(''))
-    createLetterForms(scrambledSentence)
+    createLetterForms(scrambledSentence, userSubmittedString)
 };
 
-function createLetterForms(arrayOfLetters) {
-    console.log(arrayOfLetters)
+function createLetterForms(arrayOfLetters, solution) {
+    solutionArray = solution.split('')
+    console.log(`Solution: ${solution}`)
+
     let puzzleArea = document.getElementById('puzzle-area')
-    let letterForm = `<form id="letters" class="letters"><input size="1" type="text" name="letters" id="letters"></form>`
     let interactArea = document.querySelector("#interact-area")
     interactArea.innerHTML = ""
-
-    let cleanArray = []
-    arrayOfLetters.forEach(letter => {
+    
+    let cleanSolution = []
+    solutionArray.forEach(letter => {
         if (letter.match(/\w/)) {
-            cleanArray.push(letter)
+            cleanSolution.push(letter)
         }
     })
-
-    cleanArray.forEach(letter => {
+    
+    cleanSolution.forEach(letter => {
+        let letterForm = `<form id=${letter} class="letters"><input size="1" type="text" name="letters" id="letters"></form>`
         interactArea.innerHTML += letterForm
     })
     
