@@ -72,6 +72,7 @@ function scramble(input) {
 
 // Given 2 arrays - solution + scrambled, this updates the DOM with input fields
 // Each input field has an ID that matches the solution letter
+// Event listeners for the puzzle are activated
 function createLetterForms(arrayOfLetters, solution) {
     solutionArray = solution.split('')
     console.log(`Solution: ${solution}`)
@@ -94,5 +95,25 @@ function createLetterForms(arrayOfLetters, solution) {
             interactArea.innerHTML += "<br>"
         }
     })
+    loadPuzzleListeners()
+}
 
+// Correct key-up strokes print "hooray" to the console 
+function loadPuzzleListeners () {
+    firstField = document.querySelector("#A")
+    firstField.addEventListener("keyup", function(e) {
+        e.preventDefault()
+        if (checkInput(event.keyCode, firstField) == true) {
+            console.log("hooray")
+        }
+    });
+}
+
+// This returns T/F based on puzzle field & input
+function checkInput(input, field) {
+    if (field.id == String.fromCharCode(input)) {
+        return true
+    } else {
+        return false
+    }
 }
