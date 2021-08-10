@@ -9,3 +9,8 @@ body {
 h4 {
     letter-spacing: 20px;
 }
+
+
+#solved-letters {
+    background-color: rgb(0, 255, 0);
+}

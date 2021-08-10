@@ -105,7 +105,11 @@ function addLetterListener(letter) {
         letter.addEventListener('keyup', event => {
             if (letter.id == String.fromCharCode(event.keyCode)) {
                 console.log("hooray")
+                letter.firstElementChild.id = "solved-letters"
+            } else {
+                letter.id = "letters"
             }
+            // If all fields == letter.id then balloons
         })
     })
 }
