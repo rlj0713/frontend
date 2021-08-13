@@ -4,6 +4,7 @@ const puzzlesUrl = "http://localhost:3000/puzzles.json"
 const randomPuzzleForm = document.querySelector("#random-puzzle")
 const randomPuzzleButton = document.getElementById('random-puzzle-submit')
 const createPuzzleButton = document.getElementById("submit-puzzle")
+const checkPuzzleButton = document.querySelector("#check-puzzle")
 
 let puzzleSpace = document.getElementById("interactive-puzzle")
 
@@ -22,10 +23,9 @@ createPuzzleButton.addEventListener('click', function(e) {
     scramble()
 });
 
-// The Create Puzzle Button calls scramble() on the user input
 checkPuzzleButton.addEventListener('click', function(e) {
     e.preventDefault()
-    checkPuzzle(document.querySelector("#interact-area"))
+    checkPuzzle(document.querySelector("#check-puzzle"))
 });
 
 // This returns a random puzzle object at the selected difficulty level
@@ -90,12 +90,6 @@ function createLetterForms(arrayOfLetters, solution) {
     let puzzleArea = document.getElementById('puzzle-area')
     let interactArea = document.querySelector("#interact-area")
     interactArea.innerHTML = ""
-    let checkPuzzleButton = `
-        <br><br>
-        <div class="check-puzzle" id="check-puzzle">
-            <input id="check-puzzle" type="submit" value="Check Puzzle" >
-        </div>
-    `;
     let i = 0
     
     solutionArray.forEach(letter => {
@@ -112,7 +106,6 @@ function createLetterForms(arrayOfLetters, solution) {
             interactArea.innerHTML += "<br>"
         }
     })    
-    interactArea.innerHTML += checkPuzzleButton
 }
 
 // This adds an event listener to a letter field given a letter
@@ -129,4 +122,5 @@ function createLetterForms(arrayOfLetters, solution) {
 
 function checkPuzzle(div) {
     console.log(div)
+    debugger
 }
