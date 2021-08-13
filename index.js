@@ -90,7 +90,7 @@ function createLetterForms(arrayOfLetters, solution) {
         if (letter.match(/\w/)) {
             let letterForm = `<form id=${letter} class="letters"><input size="1" type="text" name="letters" id="letters"></form>`
             interactArea.innerHTML += letterForm;
-            addLetterListener(letter)                        
+            // addLetterListener(letter)                        
             i += 1
         } else {
             interactArea.innerHTML += `${letter}`
@@ -103,14 +103,14 @@ function createLetterForms(arrayOfLetters, solution) {
 }
 
 // This adds an event listener to a letter field given a letter
-function addLetterListener(letter) {
-    document.querySelectorAll('.letters').forEach(letter => {
-        letter.addEventListener('keyup', event => {
-            if (letter.id == String.fromCharCode(event.keyCode)) {
-                console.log("match")
-            }
-            // If all fields == letter.id then balloons
-        })
-    })
-}
+// function addLetterListener(letter) {
+//     document.querySelectorAll('.letters').forEach(letter => {
+//         letter.addEventListener('keyup', event => {
+//             if (letter.id == String.fromCharCode(event.keyCode)) {
+//                 console.log("match")
+//             }
+//             // If all fields == letter.id then balloons
+//         })
+//     })
+// }
 
