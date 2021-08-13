@@ -22,6 +22,12 @@ createPuzzleButton.addEventListener('click', function(e) {
     scramble()
 });
 
+// The Create Puzzle Button calls scramble() on the user input
+checkPuzzleButton.addEventListener('click', function(e) {
+    e.preventDefault()
+    checkPuzzle(document.querySelector("#interact-area"))
+});
+
 // This returns a random puzzle object at the selected difficulty level
 // This function calls makString on that puzzle object
 function getPuzzle() { 
@@ -84,8 +90,14 @@ function createLetterForms(arrayOfLetters, solution) {
     let puzzleArea = document.getElementById('puzzle-area')
     let interactArea = document.querySelector("#interact-area")
     interactArea.innerHTML = ""
-    
+    let checkPuzzleButton = `
+        <br><br>
+        <div class="check-puzzle" id="check-puzzle">
+            <input id="check-puzzle" type="submit" value="Check Puzzle" >
+        </div>
+    `;
     let i = 0
+    
     solutionArray.forEach(letter => {
         if (letter.match(/\w/)) {
             let letterForm = `<form id=${letter} class="letters"><input size="1" type="text" name="letters" id="letters"></form>`
@@ -100,6 +112,7 @@ function createLetterForms(arrayOfLetters, solution) {
             interactArea.innerHTML += "<br>"
         }
     })    
+    interactArea.innerHTML += checkPuzzleButton
 }
 
 // This adds an event listener to a letter field given a letter
@@ -114,3 +127,6 @@ function createLetterForms(arrayOfLetters, solution) {
 //     })
 // }
 
+function checkPuzzle(div) {
+    console.log(div)
+}
