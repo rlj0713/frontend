@@ -25,7 +25,7 @@ createPuzzleButton.addEventListener('click', function(e) {
 
 checkPuzzleButton.addEventListener('click', function(e) {
     e.preventDefault()
-    checkPuzzle(document.querySelector("#check-puzzle"))
+    checkPuzzle(document.querySelector("#interact-area"))
 });
 
 // This returns a random puzzle object at the selected difficulty level
@@ -121,6 +121,8 @@ function createLetterForms(arrayOfLetters, solution) {
 // }
 
 function checkPuzzle(div) {
-    console.log(div)
-    debugger
+    collection = div.children
+    for (item of collection) { 
+        console.log(item[0].value)
+    }
 }
