@@ -121,8 +121,15 @@ function createLetterForms(arrayOfLetters, solution) {
 // }
 
 function checkPuzzle(div) {
+    let i = 0;
     collection = div.children
     for (item of collection) { 
-        console.log(item[0].value)
+        if (item[0] != undefined && item[0].value.toUpperCase() == item.id) {
+            i += 1
+            if (i == collection.length - 1) {
+                console.log("winner!")
+            }
+
+        }
     }
 }
