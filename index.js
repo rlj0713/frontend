@@ -7,6 +7,9 @@ const createPuzzleButton = document.getElementById("submit-puzzle")
 
 let puzzleSpace = document.getElementById("interactive-puzzle")
 
+let currentScore = 0
+let perfectScore = 0
+
 // The Generate Random Puzzle Button calls getPuzzle() based on selected difficulty
 randomPuzzleButton.addEventListener("click", function(e) {
     e.preventDefault()
@@ -62,6 +65,7 @@ function scramble(input) {
     if (character.match(/\w/)) {
         character = alphabet.indexOf(character) + randomNumber;
         scrambledSentence.push(alphabet[character]);
+        perfectScore += 1
     } else {
         scrambledSentence.push(character);
     }
@@ -94,9 +98,8 @@ function createLetterForms(arrayOfLetters, solution) {
         }
         if (i % 30 == 0) {
             interactArea.innerHTML += "<br>"
-        }    
-    })
-    
+        }
+    })    
 }
 
 // This adds an event listener to a letter field given a letter
@@ -104,9 +107,10 @@ function addLetterListener(letter) {
     document.querySelectorAll('.letters').forEach(letter => {
         letter.addEventListener('keyup', event => {
             if (letter.id == String.fromCharCode(event.keyCode)) {
-                console.log("hooray")
+                console.log("match")
             }
             // If all fields == letter.id then balloons
         })
     })
 }
+
