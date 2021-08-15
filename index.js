@@ -65,6 +65,7 @@ function getRandomPuzzle() {
         let puzzleObject = array[Math.floor(Math.random() * array.length)];
         makeString(puzzleObject)
     })
+    clearResult();
 };
 
 // This POSTs the user's string to the DB and calls makeString() on the...
@@ -104,6 +105,7 @@ function postPuzzleToBackEnd() {
         puzzleObject = data.data
         makeString(puzzleObject)
     });
+    clearResult();
 };
 
 // This returns a puzzle string given a puzzle object.
@@ -111,6 +113,7 @@ function postPuzzleToBackEnd() {
 function makeString(puzzleObject) {
     solution = puzzleObject.attributes.solution
     scramble(solution)
+    clearResult()
 };
 
 // This returns a crypto-valid array of letters given a string.
@@ -164,7 +167,7 @@ function createLetterForms(arrayOfLetters, solution) {
             interactArea.innerHTML += "<br>"
         }
     })
-    document.querySelector("#result-area").innerHTML = ""    
+        
 };
 
 // Displays "winner" or "keep trying" after user clicks 'check puzzle'
@@ -210,7 +213,6 @@ function moveCursorBk() {
 // This removes the last user-created puzzle from the database
 function removeLastPuzzle() {
 
-
     fetch(puzzlesUrl)
     .then(resp => resp.json())
     .then(data => {
@@ -230,4 +232,19 @@ function removeLastPuzzle() {
             console.log(id);
         }
     })
+}
+
+// Clears the text in the result div
+function clearResult() {
+    
+    let target = document.querySelector("#result-area")
+    let wTarget = document.querySelector('#result-area-win')
+    
+    if (target) {
+        target.innerText = ""
+    } else {
+        wTarget.innerText = ""
+        wTarget.id = 'result-area'
+    }
+
 }
