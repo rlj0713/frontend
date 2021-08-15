@@ -12,17 +12,16 @@ let currentScore = 0
 let perfectScore = 0
 
 
-// The Generate Random Puzzle Button calls getPuzzle() based on selected difficulty
+// The Generate Random Puzzle Button calls getRandomPuzzle() based on selected difficulty
 randomPuzzleButton.addEventListener("click", function(e) {
     e.preventDefault()
-    getPuzzle()
+    document.querySelector("#puzzle-solutiion").value = ""
+    getRandomPuzzle()
 });
 
 // The Create Puzzle Button calls scramble() on the user input
 createPuzzleButton.addEventListener('click', function(e) {
     e.preventDefault()
-    // scramble()
-    // Function to send to the backend -- Remove scramble once working
     postPuzzleToBackEnd()
     clearInputField()
 });
@@ -46,7 +45,7 @@ checkPuzzleButton.addEventListener('click', function(e) {
 
 // This returns a random puzzle object at the selected difficulty level
 // This function calls makString on that puzzle object
-function getPuzzle() { 
+function getRandomPuzzle() { 
     let selectedDifficutly = document.querySelector("#puzzle-difficulty").value
     fetch(puzzlesUrl)
     .then(resp => resp.json())
@@ -61,6 +60,34 @@ function getPuzzle() {
         let puzzleObject = array[Math.floor(Math.random() * array.length)];
         makeString(puzzleObject)
     })
+};
+
+// This POSTs the user's string to the DB and calls makeString() on the...
+// ...object that is returned
+function postPuzzleToBackEnd() {
+    let userSubmittedString = document.querySelector("#puzzle-solutiion").value
+    
+    let formData = {
+        solution: userSubmittedString,
+        difficulty_id: 1,
+    };
+
+    let configObj = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(formData)
+    };
+
+    fetch(puzzlesUrl, configObj)
+    .then(resp => resp.json())
+    .then(data => {
+        console.log(data);
+        puzzleObject = data.data
+        makeString(puzzleObject)
+    });
 };
 
 // This returns a puzzle string given a puzzle object.
@@ -95,41 +122,6 @@ function scramble(input) {
     puzzleSpace.innerText = scrambledSentence.join('')
     createLetterForms(scrambledSentence, userSubmittedString)
 };
-
-//
-//
-// This will reroute the createPuzzleButton to the back-end (instead of scramble())
-//
-//
-//
-function postPuzzleToBackEnd() {
-    let userSubmittedString = document.querySelector("#puzzle-solutiion").value
-    
-    let formData = {
-        solution: userSubmittedString,
-        difficulty_id: 1,
-    };
-
-    let configObj = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify(formData)
-    };
-
-    fetch(puzzlesUrl, configObj)
-    .then(resp => resp.json())
-    .then(data => {
-        console.log(data);
-        puzzleObject = data.data
-        makeString(puzzleObject)
-    });
-}
-
-
-
 
 // Given 2 arrays - solution + scrambled, this updates the DOM with input fields
 // Each input field has an ID that matches the solution letter
