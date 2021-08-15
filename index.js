@@ -6,6 +6,7 @@ const randomPuzzleButton = document.getElementById('random-puzzle-submit')
 const createPuzzleButton = document.getElementById("submit-puzzle")
 const checkPuzzleButton = document.querySelector("#check-puzzle")
 let puzzleSpace = document.getElementById("interactive-puzzle")
+const puzzleInteractArea = document.querySelector("#interact-area")
 
 let currentScore = 0
 let perfectScore = 0
@@ -22,6 +23,12 @@ createPuzzleButton.addEventListener('click', function(e) {
     e.preventDefault()
     scramble()
     clearInputField()
+});
+
+// The user's cursor is bumped to the next letter after each keystroke
+puzzleInteractArea.addEventListener('keyup', function(e) {
+    e.preventDefault()
+    moveCursorAlong()
 });
 
 // Clears the create a puzzle form
@@ -115,7 +122,7 @@ function createLetterForms(arrayOfLetters, solution) {
     document.querySelector("#result-area").innerHTML = ""    
 };
 
-// DIsplays "winner" or "keep trying" after user clicks 'check puzzle'
+// Displays "winner" or "keep trying" after user clicks 'check puzzle'
 function checkPuzzle(div) {
     let i = 0;
     collection = div.children
@@ -131,3 +138,11 @@ function checkPuzzle(div) {
         }
     }
 };
+
+// Moves cursor to next field after entering one letter
+function moveCursorAlong() {
+    let currentPosition = document.activeElement
+    if (currentPosition.parentElement.nextElementSibling != null) {
+        currentPosition.parentElement.nextElementSibling.firstElementChild.focus()
+    }
+}
