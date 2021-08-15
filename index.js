@@ -29,7 +29,11 @@ createPuzzleButton.addEventListener('click', function(e) {
 // The user's cursor is bumped to the next letter after each keystroke
 puzzleInteractArea.addEventListener('keyup', function(e) {
     e.preventDefault()
-    moveCursorAlong()
+    if (e.code == "Backspace") {
+        moveCursorBk()
+    } else if (e.code != 'Tab') {
+        moveCursorFwd()
+    }
 });
 
 // Clears the create a puzzle form
@@ -188,9 +192,16 @@ function checkPuzzle(div) {
 };
 
 // Moves cursor to next field after entering one letter
-function moveCursorAlong() {
+function moveCursorFwd() {
     let currentPosition = document.activeElement
     if (currentPosition.parentElement.nextElementSibling != null) {
         currentPosition.parentElement.nextElementSibling.firstElementChild.focus()
+    }
+}
+
+function moveCursorBk() {
+    let currentPosition = document.activeElement
+    if (currentPosition.parentElement.previousElementSibling != null) {
+        currentPosition.parentElement.previousElementSibling.firstElementChild.focus()
     }
 }
