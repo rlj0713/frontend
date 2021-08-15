@@ -21,7 +21,9 @@ randomPuzzleButton.addEventListener("click", function(e) {
 // The Create Puzzle Button calls scramble() on the user input
 createPuzzleButton.addEventListener('click', function(e) {
     e.preventDefault()
-    scramble()
+    // scramble()
+    // Function to send to the backend -- Remove scramble once working
+    postPuzzleToBackEnd()
     clearInputField()
 });
 
@@ -93,6 +95,41 @@ function scramble(input) {
     puzzleSpace.innerText = scrambledSentence.join('')
     createLetterForms(scrambledSentence, userSubmittedString)
 };
+
+//
+//
+// This will reroute the createPuzzleButton to the back-end (instead of scramble())
+//
+//
+//
+function postPuzzleToBackEnd() {
+    let userSubmittedString = document.querySelector("#puzzle-solutiion").value
+    
+    let formData = {
+        solution: userSubmittedString,
+        difficulty_id: 1,
+    };
+
+    let configObj = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(formData)
+    };
+
+    fetch(puzzlesUrl, configObj)
+    .then(resp => resp.json())
+    .then(data => {
+        console.log(data);
+        puzzleObject = data.data
+        makeString(puzzleObject)
+    });
+}
+
+
+
 
 // Given 2 arrays - solution + scrambled, this updates the DOM with input fields
 // Each input field has an ID that matches the solution letter
