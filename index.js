@@ -151,19 +151,13 @@ function createLetterForms(arrayOfLetters, solution) {
     let puzzleArea = document.getElementById('puzzle-area')
     let interactArea = document.querySelector("#interact-area")
     interactArea.innerHTML = ""
-    let i = 0
     
     solutionArray.forEach(letter => {
         if (letter.match(/\w/)) {
             let letterForm = `<form id=${letter} class="letters"><input size="1" type="text" name="letters" id="letters"></form>`
             interactArea.innerHTML += letterForm;                    
-            i += 1
         } else {
             interactArea.innerHTML += `${letter}`
-            i += 1
-        }
-        if (i % 30 == 0) {
-            interactArea.innerHTML += "<br>"
         }
     })
         
