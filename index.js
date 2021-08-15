@@ -111,7 +111,8 @@ function createLetterForms(arrayOfLetters, solution) {
         if (i % 30 == 0) {
             interactArea.innerHTML += "<br>"
         }
-    })    
+    })
+    document.querySelector("#result-area").innerHTML = ""    
 };
 
 // DIsplays "winner" or "keep trying" after user clicks 'check puzzle'
