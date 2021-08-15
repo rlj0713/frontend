@@ -21,7 +21,13 @@ randomPuzzleButton.addEventListener("click", function(e) {
 createPuzzleButton.addEventListener('click', function(e) {
     e.preventDefault()
     scramble()
+    clearInputField()
 });
+
+// Clears the create a puzzle form
+function clearInputField() {
+    document.querySelector("#puzzle-solutiion").value = ""
+}
 
 // The Check Puzzle Button calls checkPuzzle() when the user clicks
 checkPuzzleButton.addEventListener('click', function(e) {
@@ -96,8 +102,7 @@ function createLetterForms(arrayOfLetters, solution) {
     solutionArray.forEach(letter => {
         if (letter.match(/\w/)) {
             let letterForm = `<form id=${letter} class="letters"><input size="1" type="text" name="letters" id="letters"></form>`
-            interactArea.innerHTML += letterForm;
-            // addLetterListener(letter)                        
+            interactArea.innerHTML += letterForm;                    
             i += 1
         } else {
             interactArea.innerHTML += `${letter}`
@@ -109,19 +114,19 @@ function createLetterForms(arrayOfLetters, solution) {
     })    
 };
 
-// console.logs "winner!" or "keep trying" after user clicks 'check puzzle'
+// DIsplays "winner" or "keep trying" after user clicks 'check puzzle'
 function checkPuzzle(div) {
     let i = 0;
     collection = div.children
+
     for (item of collection) { 
         if (item[0] != undefined && item[0].value.toUpperCase() == item.id) {
             i += 1
             if (i == collection.length - 1) {
-                console.log("winner!")
+                document.querySelector("#result-area").innerHTML = "Winner!"
             }
         } else {
-            console.log("keep trying")
+            document.querySelector("#result-area").innerHTML = "Keep Trying..."
         }
     }
 };
-
