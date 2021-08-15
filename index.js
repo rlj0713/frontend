@@ -53,7 +53,7 @@ function getRandomPuzzle() {
         array = []
         
         data['data'].forEach( obj => {
-            if (obj.relationships.difficulty.data.id == document.querySelector("#puzzle-difficulty").value) {
+            if (obj.relationships.difficulty.data.id == document.querySelector("#puzzle-difficulty").value && obj.attributes.approved) {
                 array.push(obj)
             }
         })
