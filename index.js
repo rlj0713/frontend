@@ -207,13 +207,16 @@ function moveCursorBk() {
     }
 };
 
+// This removes the last user-created puzzle from the database
 function removeLastPuzzle() {
+
 
     fetch(puzzlesUrl)
     .then(resp => resp.json())
     .then(data => {
         let id = data.data.slice(-1)[0].id
-
+        
+        // Idea, abstract number 8 (which is the number of approved puzzles) to change as an admin approves new puzzles.
         if (id > 8) {
             const configObj = {
                 method: 'DELETE',
