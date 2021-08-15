@@ -5,11 +5,11 @@ const randomPuzzleForm = document.querySelector("#random-puzzle")
 const randomPuzzleButton = document.getElementById('random-puzzle-submit')
 const createPuzzleButton = document.getElementById("submit-puzzle")
 const checkPuzzleButton = document.querySelector("#check-puzzle")
-
 let puzzleSpace = document.getElementById("interactive-puzzle")
 
 let currentScore = 0
 let perfectScore = 0
+
 
 // The Generate Random Puzzle Button calls getPuzzle() based on selected difficulty
 randomPuzzleButton.addEventListener("click", function(e) {
@@ -23,6 +23,7 @@ createPuzzleButton.addEventListener('click', function(e) {
     scramble()
 });
 
+// The Check Puzzle Button calls checkPuzzle() when the user clicks
 checkPuzzleButton.addEventListener('click', function(e) {
     e.preventDefault()
     checkPuzzle(document.querySelector("#interact-area"))
@@ -106,20 +107,9 @@ function createLetterForms(arrayOfLetters, solution) {
             interactArea.innerHTML += "<br>"
         }
     })    
-}
+};
 
-// This adds an event listener to a letter field given a letter
-// function addLetterListener(letter) {
-//     document.querySelectorAll('.letters').forEach(letter => {
-//         letter.addEventListener('keyup', event => {
-//             if (letter.id == String.fromCharCode(event.keyCode)) {
-//                 console.log("match")
-//             }
-//             // If all fields == letter.id then balloons
-//         })
-//     })
-// }
-
+// console.logs "winner!" or "keep trying" after user clicks 'check puzzle'
 function checkPuzzle(div) {
     let i = 0;
     collection = div.children
@@ -129,7 +119,9 @@ function checkPuzzle(div) {
             if (i == collection.length - 1) {
                 console.log("winner!")
             }
-
+        } else {
+            console.log("keep trying")
         }
     }
-}
+};
+
