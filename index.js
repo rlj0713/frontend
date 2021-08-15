@@ -24,6 +24,7 @@ createPuzzleButton.addEventListener('click', function(e) {
     e.preventDefault()
     postPuzzleToBackEnd()
     clearInputField()
+    removeLastPuzzle()
 });
 
 // The user's cursor is bumped to the next letter after each keystroke
@@ -100,7 +101,6 @@ function postPuzzleToBackEnd() {
     fetch(puzzlesUrl, configObj)
     .then(resp => resp.json())
     .then(data => {
-        console.log(data);
         puzzleObject = data.data
         makeString(puzzleObject)
     });
@@ -197,11 +197,34 @@ function moveCursorFwd() {
     if (currentPosition.parentElement.nextElementSibling != null) {
         currentPosition.parentElement.nextElementSibling.firstElementChild.focus()
     }
-}
+};
 
+// Moves cursor to previous field after using the delete key
 function moveCursorBk() {
     let currentPosition = document.activeElement
     if (currentPosition.parentElement.previousElementSibling != null) {
         currentPosition.parentElement.previousElementSibling.firstElementChild.focus()
     }
+};
+
+function removeLastPuzzle() {
+
+    fetch(puzzlesUrl)
+    .then(resp => resp.json())
+    .then(data => {
+        let id = data.data.slice(-1)[0].id
+
+        if (id > 8) {
+            const configObj = {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                }
+            }
+            
+            fetch(`http://localhost:3000/puzzles/${id}`, configObj)
+            console.log(id);
+        }
+    })
 }
