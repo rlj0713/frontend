@@ -66,10 +66,23 @@ function getRandomPuzzle() {
 // ...object that is returned
 function postPuzzleToBackEnd() {
     let userSubmittedString = document.querySelector("#puzzle-solutiion").value
+    let l = userSubmittedString.length
+    let difficulty = 0
+    if (l <= 10) {
+        difficulty = 4
+    } else if (l > 10 && l <= 20) {
+        difficulty = 3
+    } else if (l > 20 && l <= 30) {
+        difficulty = 2
+    } else {
+        difficulty = 1
+    }
+    
+    
     
     let formData = {
-        solution: userSubmittedString,
-        difficulty_id: 1,
+        solution: userSubmittedString,       
+        difficulty_id: difficulty
     };
 
     let configObj = {
