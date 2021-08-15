@@ -10,7 +10,15 @@ h4 {
     letter-spacing: 20px;
 }
 
-
-#solved-letters {
-    background-color: rgb(0, 255, 0);
+#result-area {
+    font-size: 16px;
+    font-weight: bold;
+    color: red;
 }
+
+#result-area-win {
+    font-size: 20px;
+    font-weight: bold;
+    color: green;
+}
+

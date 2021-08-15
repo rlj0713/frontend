@@ -126,15 +126,17 @@ function createLetterForms(arrayOfLetters, solution) {
 function checkPuzzle(div) {
     let i = 0;
     collection = div.children
+    let target = document.querySelector("#result-area")
 
     for (item of collection) { 
         if (item[0] != undefined && item[0].value.toUpperCase() == item.id) {
             i += 1
             if (i == collection.length - 1) {
-                document.querySelector("#result-area").innerHTML = "Winner!"
+                target.innerHTML = "Winner!"
+                target.id = 'result-area-win'
             }
         } else {
-            document.querySelector("#result-area").innerHTML = "Keep Trying..."
+            target.innerHTML = "Keep Trying..."
         }
     }
 };
