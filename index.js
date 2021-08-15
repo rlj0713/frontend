@@ -64,6 +64,7 @@ function getRandomPuzzle() {
 
 // This POSTs the user's string to the DB and calls makeString() on the...
 // ...object that is returned
+// User submitted puzzles receive a rating based on length and a default of approved = false
 function postPuzzleToBackEnd() {
     let userSubmittedString = document.querySelector("#puzzle-solutiion").value
     let l = userSubmittedString.length
@@ -76,9 +77,7 @@ function postPuzzleToBackEnd() {
         difficulty = 2
     } else {
         difficulty = 1
-    }
-    
-    
+    }    
     
     let formData = {
         solution: userSubmittedString,       
