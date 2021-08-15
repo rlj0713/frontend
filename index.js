@@ -168,16 +168,21 @@ function checkPuzzle(div) {
     let i = 0;
     collection = div.children
     let target = document.querySelector("#result-area")
+    let wTarget = document.querySelector('#result-area-win')
 
     for (item of collection) { 
         if (item[0] != undefined && item[0].value.toUpperCase() == item.id) {
             i += 1
-            if (i == collection.length - 1) {
-                target.innerHTML = "Winner!"
+            if (i == collection.length) {
+                target.innerText = "Winner!"
                 target.id = 'result-area-win'
+                break
+            } else if (wTarget != null) {
+                wTarget.innerText = "    You already won, try a new puzzle."
+                break
+            } else {
+                target.innerText = "Keep Trying..."
             }
-        } else {
-            target.innerHTML = "Keep Trying..."
         }
     }
 };
