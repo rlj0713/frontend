@@ -11,7 +11,6 @@ const puzzleInteractArea = document.querySelector("#interact-area")
 let currentScore = 0
 let perfectScore = 0
 
-
 // The Generate Random Puzzle Button calls getRandomPuzzle() based on selected difficulty
 randomPuzzleButton.addEventListener("click", function(e) {
     e.preventDefault()
@@ -236,7 +235,6 @@ function removeLastPuzzle() {
 
 // Clears the text in the result div
 function clearResult() {
-    
     let target = document.querySelector("#result-area")
     let wTarget = document.querySelector('#result-area-win')
     
@@ -246,5 +244,4 @@ function clearResult() {
         wTarget.innerText = ""
         wTarget.id = 'result-area'
     }
-
 }
