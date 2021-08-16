@@ -49,6 +49,9 @@ checkPuzzleButton.addEventListener('click', function(e) {
 
 // This returns a random puzzle object at the selected difficulty level
 // This function calls makString on that puzzle object
+// ***********************************
+// REFACTOR TO OO
+// ***********************************
 function getRandomPuzzle() { 
     let selectedDifficutly = document.querySelector("#puzzle-difficulty").value
     fetch(puzzlesUrl)
@@ -70,6 +73,9 @@ function getRandomPuzzle() {
 // This POSTs the user's string to the DB and calls makeString() on the...
 // ...object that is returned
 // User submitted puzzles receive a rating based on length and a default of approved = false
+// ***********************************
+// REFACTOR TO OO
+// ***********************************
 function postPuzzleToBackEnd() {
     let userSubmittedString = document.querySelector("#puzzle-solutiion").value
     let l = userSubmittedString.length
@@ -118,6 +124,9 @@ function makeString(puzzleObject) {
 // This returns a crypto-valid array of letters given a string.
 // The solution is currently printing to the console.
 // The crypto-valid array is appended to the DOM.
+// ***********************************
+// REFACTOR TO OO
+// ***********************************
 function scramble(input) {
     let userSubmittedString = document.querySelector("#puzzle-solutiion").value || input
     let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
@@ -144,6 +153,9 @@ function scramble(input) {
 // Given 2 arrays - solution + scrambled, this updates the DOM with input fields
 // Each input field has an ID that matches the solution letter
 // Event listeners for each field print "hooray to the screen"
+// ***********************************
+// REFACTOR TO OO
+// ***********************************
 function createLetterForms(arrayOfLetters, solution) {
     solutionArray = solution.split('')
     console.log(`Solution: ${solution}`)
@@ -160,7 +172,6 @@ function createLetterForms(arrayOfLetters, solution) {
             interactArea.innerHTML += `${letter}`
         }
     })
-        
 };
 
 // Displays "winner" or "keep trying" after user clicks 'check puzzle'
@@ -204,6 +215,9 @@ function moveCursorBk() {
 };
 
 // This removes the last user-created puzzle from the database
+// ***********************************
+// REFACTOR TO OO
+// ***********************************
 function removeLastPuzzle() {
 
     fetch(puzzlesUrl)
