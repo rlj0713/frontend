@@ -70,6 +70,40 @@ function getRandomPuzzle() {
     clearResult();
 };
 
+
+// ********************************************************************
+// This is the OO refactor for getRandomPuzzle && scramble() / createLetterForms()
+// ********************************************************************
+
+const renderPuzzleButton = document.querySelector("#render-puzzle-submit")
+
+renderPuzzleButton.addEventListener("click", function(e) {
+    e.preventDefault()
+    
+});
+class RandomPuzzle {
+
+    constructor({solution, scrambled, difficulty_id, approved, id}){
+        this.solution = solution
+        this.scrambled = scrambled
+        this.difficulty_id = difficulty_id
+        this.approved = approved
+        this.id = id
+    }
+
+}
+
+function renderPuzzles(args) {
+    const puzzle = arg["data"]
+    puzzle.forEach(puzzle => {
+        debugger
+        new RandomPuzzle(puzzle)
+        console.log(puzzle)
+    })
+}
+
+
+
 // This POSTs the user's string to the DB and calls makeString() on the...
 // ...object that is returned
 // User submitted puzzles receive a rating based on length and a default of approved = false
@@ -122,7 +156,6 @@ function makeString(puzzleObject) {
 };
 
 // This returns a crypto-valid array of letters given a string.
-// The solution is currently printing to the console.
 // The crypto-valid array is appended to the DOM.
 // ***********************************
 // REFACTOR TO OO
