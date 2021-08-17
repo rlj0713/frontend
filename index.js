@@ -79,7 +79,7 @@ const renderPuzzleButton = document.querySelector("#render-puzzle-submit")
 
 renderPuzzleButton.addEventListener("click", function(e) {
     e.preventDefault()
-    
+
 });
 class RandomPuzzle {
 
@@ -90,6 +90,7 @@ class RandomPuzzle {
         this.approved = approved
         this.id = id
     }
+    
 
 }
 
