@@ -11,11 +11,11 @@ const puzzleInteractArea = document.querySelector("#interact-area")
 let currentScore = 0
 let perfectScore = 0
 
-// The Generate Random Puzzle Button calls getRandomPuzzle() based on selected difficulty
+// The Generate Random Puzzle Button calls getPuzzleAtDifficulty() based on selected difficulty
 randomPuzzleButton.addEventListener("click", function(e) {
     e.preventDefault()
     document.querySelector("#puzzle-solutiion").value = ""
-    getRandomPuzzle()
+    getPuzzleAtDifficulty()
 });
 
 // The Create Puzzle Button calls scramble() on the user input
@@ -47,13 +47,9 @@ checkPuzzleButton.addEventListener('click', function(e) {
     checkPuzzle(document.querySelector("#interact-area"))
 });
 
-// This returns a random puzzle object at the selected difficulty level
-// This function calls makeString() on that puzzle object
-// ***********************************
-// REFACTOR TO OO
-// ***********************************
-
-function getRandomPuzzle() {
+// This matches a random puzzle object with the selected difficulty level
+// This function calls makeString() on the appropriate puzzle object
+function getPuzzleAtDifficulty() {
     let selectedDifficutly = parseInt(document.querySelector("#puzzle-difficulty").value)
     let array = []
     
@@ -73,7 +69,7 @@ function getRandomPuzzle() {
 };
 
 // *******************************************
-// This is the OO refactor for getRandomPuzzle
+// This is the OO refactor for getPuzzleAtDifficulty
 // *******************************************
 class RandomPuzzle {
     static all = [];
