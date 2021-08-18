@@ -76,9 +76,6 @@ function getRandomPuzzle() {
 // *******************************************
 // This is the OO refactor for getRandomPuzzle
 // *******************************************
-
-const renderPuzzleButton = document.querySelector("#render-puzzle-submit");
-
 class RandomPuzzle {
     static all = [];
 
@@ -90,36 +87,12 @@ class RandomPuzzle {
         this.id = id;
 
         RandomPuzzle.all.push(this);
+
     };
-
-    static printPuzzle() {
-        RandomPuzzle.all.forEach(puzzle => console.log(puzzle.solution));
-    };
-
-    renderPuzzle(args) {
-        const puzzleSection = document.getElementById('oo-puzzle-section');
-        const puzzleList = document.createElement('div');
-        puzzleList.puzzleSection.add('puzzle-list');
-
-        const puzzleInfo = this.renderPuzzleInfo();
-
-        puzzleList.appendChild(puzzleInfo);
-        puzzleSection.appendChild(puzzleList);
-    };
-
-    renderPuzzleInfo() {
-        const puzzleData = document.createElement('div');
-        
-        puzzleData.innerHTML = `
-        <h1>Solution: ${this.solution}</h1>
-        <h1>Scrambled: ${this.scrambled}</h1>
-        `;
-
-        return puzzleData
-    }
-
-
 }
+
+// Move this class to a separate file
+// This class along with the RandomPuzzle class make RandomPuzzle.all globally available on DOM-Load
 class RandomPuzzleServices {
     constructor(baseURL) {
         this.baseURL = baseURL;
@@ -129,22 +102,19 @@ class RandomPuzzleServices {
         fetch(this.baseURL)
         .then(resp => resp.json())
         .then(puzzles => {
-            console.log(puzzles)
-            // puzzles.forEach(puzzle => {
-            //     const newPuzzle = new RandomPuzzle(puzzle)
-            //     newPuzzle.renderPuzzle();
-            // });
+            puzzles.data.forEach(puzzle => {
+                const newPuzzle = new RandomPuzzle({id: puzzle.id, ...puzzle.attributes})
+            });
         });
     }
 };
 
 const puzzleApi = new RandomPuzzleServices('http://localhost:3000/puzzles');
 
-renderPuzzleButton.addEventListener("click", function(e) {
+document.addEventListener("DOMContentLoaded", function(e) {
     e.preventDefault()
     puzzleApi.getPuzzles(puzzlesUrl);
 });
-
 
 
 // This POSTs the user's string to the DB and calls makeString() on the...
