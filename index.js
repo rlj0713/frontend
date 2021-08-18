@@ -52,26 +52,25 @@ checkPuzzleButton.addEventListener('click', function(e) {
 // ***********************************
 // REFACTOR TO OO
 // ***********************************
-function getRandomPuzzle() { 
-    let selectedDifficutly = document.querySelector("#puzzle-difficulty").value
-    fetch(puzzlesUrl)
-    .then(resp => resp.json())
-    .then(data => {
-        array = []
-        
-        // data is the array of puzzle objects here
 
-        data['data'].forEach( obj => {
-            if (obj.relationships.difficulty.data.id == document.querySelector("#puzzle-difficulty").value && obj.attributes.approved) {
-                array.push(obj)
-            }
-        })
-        let puzzleObject = array[Math.floor(Math.random() * array.length)];
-        makeString(puzzleObject)
-    })
+function getRandomPuzzle() {
+    let selectedDifficutly = parseInt(document.querySelector("#puzzle-difficulty").value)
+    let array = []
+    
+    if (selectedDifficutly == 1) {
+        array = RandomPuzzle.easy
+    } else if (selectedDifficutly == 2) {
+        array = RandomPuzzle.medium
+    } else if (selectedDifficutly == 3) {
+        array = RandomPuzzle.hard
+    } else if (selectedDifficutly == 4) {
+        array = RandomPuzzle.expert
+    }
+    
+    let puzzleObject = array[Math.floor(Math.random()*array.length)];
+    makeString(puzzleObject)
     clearResult();
 };
-
 
 // *******************************************
 // This is the OO refactor for getRandomPuzzle
@@ -82,6 +81,7 @@ class RandomPuzzle {
     static medium = [];
     static hard = [];
     static expert = [];
+    static unapproved = [];
 
     constructor({solution, scrambled, difficulty_id, approved, id}) {
         this.solution = solution;
@@ -92,7 +92,9 @@ class RandomPuzzle {
 
         RandomPuzzle.all.push(this);
 
-        if (this.difficulty_id == 1) {
+        if (this.approved == false) {
+            RandomPuzzle.unapproved.push(this);
+        } else if (this.difficulty_id == 1) {
             RandomPuzzle.easy.push(this);
         } else if (this.difficulty_id == 2) {
             RandomPuzzle.medium.push(this);
@@ -176,7 +178,7 @@ function postPuzzleToBackEnd() {
 // This returns a puzzle string given a puzzle object.
 // The function calls scramble on that string.
 function makeString(puzzleObject) {
-    solution = puzzleObject.attributes.solution
+    solution = puzzleObject.solution
     scramble(solution)
     clearResult()
 };
