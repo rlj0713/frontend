@@ -60,21 +60,9 @@ document.addEventListener("DOMContentLoaded", function(e) {
 // ...object that is returned
 // User submitted puzzles receive a rating based on length and a default of approved = false
 function postPuzzleToBackEnd() {
-    // Maybe separate into a different function
     let userSubmittedString = document.querySelector("#puzzle-solutiion").value
-    let l = userSubmittedString.length
-    let difficulty = 0
-    if (l <= 10) {
-        difficulty = 4
-    } else if (l > 10 && l <= 20) {
-        difficulty = 3
-    } else if (l > 20 && l <= 30) {
-        difficulty = 2
-    } else {
-        difficulty = 1
-    }    
-    // assignDifficulty()
-    
+    let difficulty = assignDifficulty(userSubmittedString)
+
     let formData = {
         solution: userSubmittedString,       
         difficulty_id: difficulty
@@ -97,3 +85,17 @@ function postPuzzleToBackEnd() {
     });
     clearResult();
 };
+
+// Given a string, this returns a difficulty rating: 1 - 4
+function assignDifficulty(string) {
+    let l = string.length
+    if (l <= 10) {
+        return 4
+    } else if (l > 10 && l <= 20) {
+        return 3
+    } else if (l > 20 && l <= 30) {
+        return 2
+    } else {
+        return 1
+    }    
+}

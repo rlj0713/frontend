@@ -187,7 +187,6 @@ function removeLastPuzzle() {
             }
             
             fetch(`http://localhost:3000/puzzles/${id}`, configObj)
-            console.log(id);
         }
     })
 }
