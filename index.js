@@ -78,6 +78,10 @@ function getRandomPuzzle() {
 // *******************************************
 class RandomPuzzle {
     static all = [];
+    static easy = [];
+    static medium = [];
+    static hard = [];
+    static expert = [];
 
     constructor({solution, scrambled, difficulty_id, approved, id}) {
         this.solution = solution;
@@ -88,6 +92,15 @@ class RandomPuzzle {
 
         RandomPuzzle.all.push(this);
 
+        if (this.difficulty_id == 1) {
+            RandomPuzzle.easy.push(this);
+        } else if (this.difficulty_id == 2) {
+            RandomPuzzle.medium.push(this);
+        } else if (this.difficulty_id == 3) {
+            RandomPuzzle.hard.push(this);
+        } else if (this.difficulty_id == 4) {
+            RandomPuzzle.expert.push(this);
+        }
     };
 }
 
