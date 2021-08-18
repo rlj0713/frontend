@@ -68,9 +68,8 @@ function getPuzzleAtDifficulty() {
     clearResult();
 };
 
-// *******************************************
-// This is the OO refactor for getPuzzleAtDifficulty
-// *******************************************
+// The RandomPuzzle Class fetches puzzles from the API and sorts them by difficulty
+// RandomPuzzle.easy for example returns an array of easy puzzle objects
 class RandomPuzzle {
     static all = [];
     static easy = [];
@@ -226,12 +225,13 @@ function createLetterForms(arrayOfLetters, solution) {
 };
 
 // Displays "winner" or "keep trying" after user clicks 'check puzzle'
+// Bug ---------------- For some reason keep trying is not working effectively---------------------------------------
 function checkPuzzle(div) {
     let i = 0;
     collection = div.children
     let target = document.querySelector("#result-area")
     let wTarget = document.querySelector('#result-area-win')
-
+    
     for (item of collection) { 
         if (item[0] != undefined && item[0].value.toUpperCase() == item.id) {
             i += 1
