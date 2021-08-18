@@ -225,7 +225,6 @@ function createLetterForms(arrayOfLetters, solution) {
 };
 
 // Displays "winner" or "keep trying" after user clicks 'check puzzle'
-// Bug ---------------- For some reason keep trying is not working effectively---------------------------------------
 function checkPuzzle(div) {
     let i = 0;
     collection = div.children
@@ -242,9 +241,9 @@ function checkPuzzle(div) {
             } else if (wTarget != null) {
                 wTarget.innerText = "    You already won, try a new puzzle."
                 break
-            } else {
-                target.innerText = "Keep Trying..."
-            }
+            } 
+        } else {
+            target.innerText = "Keep Trying..."
         }
     }
 };
