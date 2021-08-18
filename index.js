@@ -68,52 +68,6 @@ function getPuzzleAtDifficulty() {
     clearResult();
 };
 
-// This POSTs the user's string to the DB and calls makeString() on the...
-// ...object that is returned
-// User submitted puzzles receive a rating based on length and a default of approved = false
-// ***********************************
-// REFACTOR TO OO
-// ***********************************
-// Add to the puzzle services class
-function postPuzzleToBackEnd() {
-    // Maybe separate into a different function
-    let userSubmittedString = document.querySelector("#puzzle-solutiion").value
-    let l = userSubmittedString.length
-    let difficulty = 0
-    if (l <= 10) {
-        difficulty = 4
-    } else if (l > 10 && l <= 20) {
-        difficulty = 3
-    } else if (l > 20 && l <= 30) {
-        difficulty = 2
-    } else {
-        difficulty = 1
-    }    
-    // assignDifficulty()
-    
-    let formData = {
-        solution: userSubmittedString,       
-        difficulty_id: difficulty
-    };
-
-    let configObj = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify(formData)
-    };
-
-    fetch(puzzlesUrl, configObj)
-    .then(resp => resp.json())
-    .then(data => {
-        const newPuzzle = new RandomPuzzle({id: data['data'].id, ...data['data'].attributes})
-        makeString(newPuzzle)
-    });
-    clearResult();
-};
-
 // This returns a puzzle string given a puzzle object.
 // The function calls scramble on that string.
 function makeString(puzzleObject) {
