@@ -48,7 +48,7 @@ checkPuzzleButton.addEventListener('click', function(e) {
 });
 
 // This returns a random puzzle object at the selected difficulty level
-// This function calls makString on that puzzle object
+// This function calls makeString() on that puzzle object
 // ***********************************
 // REFACTOR TO OO
 // ***********************************
@@ -59,6 +59,8 @@ function getRandomPuzzle() {
     .then(data => {
         array = []
         
+        // data is the array of puzzle objects here
+
         data['data'].forEach( obj => {
             if (obj.relationships.difficulty.data.id == document.querySelector("#puzzle-difficulty").value && obj.attributes.approved) {
                 array.push(obj)
@@ -71,37 +73,77 @@ function getRandomPuzzle() {
 };
 
 
-// ********************************************************************
-// This is the OO refactor for getRandomPuzzle && scramble() / createLetterForms()
-// ********************************************************************
+// *******************************************
+// This is the OO refactor for getRandomPuzzle
+// *******************************************
 
-const renderPuzzleButton = document.querySelector("#render-puzzle-submit")
+const renderPuzzleButton = document.querySelector("#render-puzzle-submit");
+
+class RandomPuzzle {
+    static all = [];
+
+    constructor({solution, scrambled, difficulty_id, approved, id}) {
+        this.solution = solution;
+        this.scrambled = scrambled;
+        this.difficulty_id = difficulty_id;
+        this.approved = approved;
+        this.id = id;
+
+        RandomPuzzle.all.push(this);
+    };
+
+    static printPuzzle() {
+        RandomPuzzle.all.forEach(puzzle => console.log(puzzle.solution));
+    };
+
+    renderPuzzle(args) {
+        const puzzleSection = document.getElementById('oo-puzzle-section');
+        const puzzleList = document.createElement('div');
+        puzzleList.puzzleSection.add('puzzle-list');
+
+        const puzzleInfo = this.renderPuzzleInfo();
+
+        puzzleList.appendChild(puzzleInfo);
+        puzzleSection.appendChild(puzzleList);
+    };
+
+    renderPuzzleInfo() {
+        const puzzleData = document.createElement('div');
+        
+        puzzleData.innerHTML = `
+        <h1>Solution: ${this.solution}</h1>
+        <h1>Scrambled: ${this.scrambled}</h1>
+        `;
+
+        return puzzleData
+    }
+
+
+}
+class RandomPuzzleServices {
+    constructor(baseURL) {
+        this.baseURL = baseURL;
+    };
+
+    getPuzzles() {
+        fetch(this.baseURL)
+        .then(resp => resp.json())
+        .then(puzzles => {
+            console.log(puzzles)
+            // puzzles.forEach(puzzle => {
+            //     const newPuzzle = new RandomPuzzle(puzzle)
+            //     newPuzzle.renderPuzzle();
+            // });
+        });
+    }
+};
+
+const puzzleApi = new RandomPuzzleServices('http://localhost:3000/puzzles');
 
 renderPuzzleButton.addEventListener("click", function(e) {
     e.preventDefault()
-
+    puzzleApi.getPuzzles(puzzlesUrl);
 });
-class RandomPuzzle {
-
-    constructor({solution, scrambled, difficulty_id, approved, id}){
-        this.solution = solution
-        this.scrambled = scrambled
-        this.difficulty_id = difficulty_id
-        this.approved = approved
-        this.id = id
-    }
-    
-
-}
-
-function renderPuzzles(args) {
-    const puzzle = arg["data"]
-    puzzle.forEach(puzzle => {
-        debugger
-        new RandomPuzzle(puzzle)
-        console.log(puzzle)
-    })
-}
 
 
 
@@ -158,9 +200,6 @@ function makeString(puzzleObject) {
 
 // This returns a crypto-valid array of letters given a string.
 // The crypto-valid array is appended to the DOM.
-// ***********************************
-// REFACTOR TO OO
-// ***********************************
 function scramble(input) {
     let userSubmittedString = document.querySelector("#puzzle-solutiion").value || input
     let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
@@ -187,9 +226,6 @@ function scramble(input) {
 // Given 2 arrays - solution + scrambled, this updates the DOM with input fields
 // Each input field has an ID that matches the solution letter
 // Event listeners for each field print "hooray to the screen"
-// ***********************************
-// REFACTOR TO OO
-// ***********************************
 function createLetterForms(arrayOfLetters, solution) {
     solutionArray = solution.split('')
     console.log(`Solution: ${solution}`)
