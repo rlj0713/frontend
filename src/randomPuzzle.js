@@ -47,14 +47,40 @@ class RandomPuzzleServices {
             });
         });
     }
+
 };
 
 const puzzleApi = new RandomPuzzleServices('http://localhost:3000/puzzles');
+
+// On DOM-load, RandomPuzzle eagerly fetches all puzzles
 document.addEventListener("DOMContentLoaded", function(e) {
     e.preventDefault()
     puzzleApi.getPuzzles(puzzlesUrl);
 });
 
+// This removes the last user-created puzzle from the database
+// This acts like a cleaner and prevents user-created puzzles from persisting too long
+function removeLastPuzzle() {
+
+    fetch(puzzlesUrl)
+    .then(resp => resp.json())
+    .then(data => {
+        let id = data.data.slice(-1)[0].id
+        
+        // Idea, abstract number 8 (which is the number of approved puzzles) to change as an admin approves new puzzles.
+        if (id > 8) {
+            const configObj = {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                }
+            }
+            
+            fetch(`http://localhost:3000/puzzles/${id}`, configObj)
+        }
+    })
+}
 
 // This POSTs the user's string to the DB and calls makeString() on the...
 // ...object that is returned

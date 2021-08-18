@@ -5,9 +5,9 @@ const randomPuzzleForm = document.querySelector("#random-puzzle")
 const randomPuzzleButton = document.getElementById('random-puzzle-submit')
 const createPuzzleButton = document.getElementById("submit-puzzle")
 const checkPuzzleButton = document.querySelector("#check-puzzle")
-let puzzleSpace = document.getElementById("interactive-puzzle")
 const puzzleInteractArea = document.querySelector("#interact-area")
 
+let puzzleSpace = document.getElementById("interactive-puzzle")
 let currentScore = 0
 let perfectScore = 0
 
@@ -103,7 +103,6 @@ function scramble(input) {
 
 // Given 2 arrays - solution + scrambled, this updates the DOM with input fields
 // Each input field has an ID that matches the solution letter
-// Event listeners for each field print "hooray to the screen"
 function createLetterForms(arrayOfLetters, solution) {
     solutionArray = solution.split('')
     console.log(`Solution: ${solution}`)
@@ -161,35 +160,6 @@ function moveCursorBk() {
         currentPosition.parentElement.previousElementSibling.firstElementChild.focus()
     }
 };
-
-// This removes the last user-created puzzle from the database
-// ***********************************
-// REFACTOR TO OO
-// ***********************************
-// Move to services class
-// No changes necessary
-// Call this on an instance of PuzzleServices class
-function removeLastPuzzle() {
-
-    fetch(puzzlesUrl)
-    .then(resp => resp.json())
-    .then(data => {
-        let id = data.data.slice(-1)[0].id
-        
-        // Idea, abstract number 8 (which is the number of approved puzzles) to change as an admin approves new puzzles.
-        if (id > 8) {
-            const configObj = {
-                method: 'DELETE',
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json"
-                }
-            }
-            
-            fetch(`http://localhost:3000/puzzles/${id}`, configObj)
-        }
-    })
-}
 
 // Clears the text in the result div
 function clearResult() {
