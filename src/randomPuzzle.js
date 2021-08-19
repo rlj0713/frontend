@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 function removeLastPuzzle() {
     
     const baseURL = "http://localhost:3000/puzzles"
-    let puzzleToDelete = RandomPuzzle.all[RandomPuzzle.all.length - 2]
+    let puzzleToDelete = RandomPuzzle.all[RandomPuzzle.all.length - 1]
     let id = puzzleToDelete.id
    
     const configObj = {
