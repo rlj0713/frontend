@@ -7,7 +7,7 @@ body {
     padding-top: 40px;
     padding-left: 60px;
     padding-right: 60px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.95)), url(resources/cipher-background.jpg)
+    background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)), url(resources/cipher-background.jpg)
 }
 
 h4 {
@@ -29,6 +29,7 @@ h4 {
 
 h2, h3, h4, form, p {
     color: rgb(190, 229, 255);
+    font-family: courier;
 }
 
 u {
@@ -42,4 +43,5 @@ u {
 h1 {
     color: rgb(190, 229, 255);
     font-size: 50px;
+    font-family: courier;
 }
