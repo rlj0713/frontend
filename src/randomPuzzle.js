@@ -77,7 +77,7 @@ function removeLastPuzzle() {
     
     fetch(baseURL + `/` + id, configObj)
     .then(resp => resp.json())
-    .then(data => console.log(`${data} was successfully deleted`))
+    .then(data => console.log(data.message))
     
 }
 
