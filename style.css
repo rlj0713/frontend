@@ -27,8 +27,16 @@ h4 {
 }
 
 
-h2, h3, h4, form {
+h2, h3, h4, form, p {
     color: rgb(190, 229, 255);
+}
+
+u {
+    color: rgb(190, 229, 255);
+    padding-left: 8px;
+    padding-right: 8px;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 h1 {

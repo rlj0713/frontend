@@ -115,8 +115,10 @@ function createLetterForms(arrayOfLetters, solution) {
         if (letter.match(/\w/)) {
             let letterForm = `<form id=${letter} class="letters"><input size="1" type="text" name="letters" id="letters"></form>`
             interactArea.innerHTML += letterForm;                    
+        } else if (letter != " ") {
+            interactArea.innerHTML += `<u>${letter}</u>`
         } else {
-            interactArea.innerHTML += `${letter}`
+            interactArea.innerHTML += letter
         }
     })
 };
