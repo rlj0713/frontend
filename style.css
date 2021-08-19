@@ -1,9 +1,13 @@
 .letters {
     display: inline-block;
+    border-radius: 3px;
 }
 
 body {
-    background-color: rgb(245, 212, 185);
+    padding-top: 40px;
+    padding-left: 60px;
+    padding-right: 60px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.95)), url(resources/cipher-background.jpg)
 }
 
 h4 {
@@ -19,6 +23,15 @@ h4 {
 #result-area-win {
     font-size: 20px;
     font-weight: bold;
-    color: green;
+    color: rgb(1, 182, 1);
 }
 
+
+h2, h3, h4, form {
+    color: rgb(190, 229, 255);
+}
+
+h1 {
+    color: rgb(190, 229, 255);
+    font-size: 50px;
+}
