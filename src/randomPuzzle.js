@@ -58,7 +58,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
     puzzleApi.getPuzzles(puzzlesUrl);
 });
 
-
 // This removes the last user-created puzzle from the database
 // This acts like a cleaner and prevents user-created puzzles from persisting too long
 function removeLastPuzzle() {
