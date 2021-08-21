@@ -78,6 +78,7 @@ function makeString(puzzleObject) {
 
 // This returns a crypto-valid array of letters given a string.
 // The crypto-valid array is appended to the DOM.
+// This needs to be refactored to patch the puzzle object with a scrambled attribute
 function scramble(input) {
     let userSubmittedString = document.querySelector("#puzzle-solutiion").value || input
     let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
@@ -126,25 +127,26 @@ function createLetterForms(arrayOfLetters, solution) {
 // Displays "winner" or "keep trying" after user clicks 'check puzzle'
 function checkPuzzle(div) {
     let i = 0;
-    collection = div.children
+    let collection = div.children
     let target = document.querySelector("#result-area")
     let wTarget = document.querySelector('#result-area-win')
     
-    for (item of collection) { 
-        if (item[0] != undefined && item[0].value.toUpperCase() == item.id) {
+    for (item of collection) {
+        
+        if (item.className == "" || item[0].value.toUpperCase() == item.id) {
             i += 1
             if (i == collection.length) {
                 target.innerText = "Winner!"
                 target.id = 'result-area-win'
-                break
             } else if (wTarget != null) {
                 wTarget.innerText = "    You already won, try a new puzzle."
                 break
-            } 
-        } else {
-            target.innerText = "Keep Trying..."
+            } else {
+                target.innerText = "Keep Trying..."
+            }
         }
     }
+
 };
 
 // Moves cursor to next field after entering one letter
