@@ -152,16 +152,18 @@ function checkPuzzle(div) {
 // Moves cursor to next field after entering one letter
 function moveCursorFwd() {
     let currentPosition = document.activeElement
-    if (currentPosition.parentElement.nextElementSibling != null) {
-        currentPosition.parentElement.nextElementSibling.firstElementChild.focus()
+    let nextElement = currentPosition.parentElement.nextElementSibling
+    if (nextElement != null && nextElement.id != "") {
+        nextElement.firstElementChild.focus()
     }
 };
 
 // Moves cursor to previous field after using the delete key
 function moveCursorBk() {
     let currentPosition = document.activeElement
-    if (currentPosition.parentElement.previousElementSibling != null) {
-        currentPosition.parentElement.previousElementSibling.firstElementChild.focus()
+    let previousPosition = currentPosition.parentElement.previousElementSibling
+    if (previousPosition != null && previousPosition.id != "") {
+        previousPosition.firstElementChild.focus()
     }
 };
 
