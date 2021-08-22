@@ -150,11 +150,16 @@ function checkPuzzle(div) {
 };
 
 // Moves cursor to next field after entering one letter
+// Handles some punctuation. Refactoring could eliminate all hiccups here.
 function moveCursorFwd() {
     let currentPosition = document.activeElement
     let nextElement = currentPosition.parentElement.nextElementSibling
     if (nextElement != null && nextElement.id != "") {
         nextElement.firstElementChild.focus()
+    } else if (nextElement.innerText == "'") {
+        nextElement.nextElementSibling.firstElementChild.focus()
+    } else if (nextElement.innerText == ".") {
+        currentPosition.focus()
     }
 };
 
