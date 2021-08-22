@@ -23,7 +23,6 @@ createPuzzleButton.addEventListener('click', function(e) {
     e.preventDefault()
     postPuzzleToBackEnd()
     clearInputField()
-    removeLastPuzzle()
 });
 
 // The user's cursor is bumped to the next letter after each keystroke
@@ -65,7 +64,6 @@ function getPuzzleAtDifficulty() {
     
     let puzzleObject = array[Math.floor(Math.random()*array.length)];
     makeString(puzzleObject)
-    clearResult();
 };
 
 // This returns a puzzle string given a puzzle object.
