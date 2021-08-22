@@ -158,8 +158,6 @@ function moveCursorFwd() {
         nextElement.firstElementChild.focus()
     } else if (nextElement.innerText == "'") {
         nextElement.nextElementSibling.firstElementChild.focus()
-    } else if (nextElement.innerText == ".") {
-        currentPosition.focus()
     }
 };
 
