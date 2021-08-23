@@ -20,9 +20,12 @@ randomPuzzleButton.addEventListener("click", function(e) {
 
 // The Create Puzzle Button calls scramble() on the user input
 createPuzzleButton.addEventListener('click', function(e) {
-    e.preventDefault()
-    postPuzzleToBackEnd()
-    clearInputField()
+    e.preventDefault();
+    postPuzzleToBackEnd();
+    clearInputField();
+    setTimeout(function(){
+        removeLastPuzzle()
+    }, 1000);
 });
 
 // The user's cursor is bumped to the next letter after each keystroke

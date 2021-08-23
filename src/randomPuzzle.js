@@ -30,6 +30,11 @@ class RandomPuzzle {
             RandomPuzzle.expert.push(this);
         }
     };
+
+    // deletePuzzle = (e) => {
+    //     this.element.remove()
+    //     puzzleApi.deleteItem(this.id)
+    // }
 }
 
 // This class along with the RandomPuzzle class make RandomPuzzle.all globally available on DOM-Load
@@ -62,9 +67,9 @@ document.addEventListener("DOMContentLoaded", function(e) {
 // This acts like a cleaner and prevents user-created puzzles from persisting too long
 function removeLastPuzzle() {
     const baseURL = "http://localhost:3000/puzzles"
-    let puzzleToDelete = RandomPuzzle.all[RandomPuzzle.all.length - 1]
+    let puzzleToDelete = RandomPuzzle.all.pop()
     let id = puzzleToDelete.id
-   
+
     const configObj = {
         method: 'DELETE',
         headers: {
