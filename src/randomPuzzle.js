@@ -70,6 +70,7 @@ function removeLastPuzzle() {
     let puzzleToDelete = RandomPuzzle.all.pop()
     let id = puzzleToDelete.id
 
+    
     const configObj = {
         method: 'DELETE',
         headers: {
