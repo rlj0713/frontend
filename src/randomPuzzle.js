@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
 // This removes the last user-created puzzle from the database
 // This acts like a cleaner and prevents user-created puzzles from persisting too long
+// If I launched this app, I would change this to apply to each user individually (no users now)
 function removeLastPuzzle() {
     const baseURL = "http://localhost:3000/puzzles"
     let puzzleToDelete = RandomPuzzle.all.pop()
