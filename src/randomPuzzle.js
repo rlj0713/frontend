@@ -7,7 +7,7 @@ class RandomPuzzle {
     static medium = [];
     static hard = [];
     static expert = [];
-    static unapproved = [];
+    // static unapproved = [];
 
     constructor({solution, scrambled, difficulty_id, approved, id}) {
         this.solution = solution;
@@ -71,7 +71,6 @@ function removeLastPuzzle() {
     let puzzleToDelete = RandomPuzzle.all.pop()
     let id = puzzleToDelete.id
 
-    
     const configObj = {
         method: 'DELETE',
         headers: {
@@ -83,7 +82,6 @@ function removeLastPuzzle() {
     fetch(baseURL + `/` + id, configObj)
     .then(resp => resp.json())
     .then(data => console.log(data.message))
-    
 }
 
 // This POSTs the user's string to the DB and calls makeString() on the...

@@ -2,6 +2,8 @@
 
 Please refer to this repo for the backend of this project - https://github.com/rlj0713/backend2
 
+Walkthrough of Cryptoquote - https://youtu.be/9dXZw8p4Mrw
+
 Name: Cryptoquote Generator
 
 Description: This application has two main capabilites

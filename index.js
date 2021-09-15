@@ -10,6 +10,7 @@ const puzzleInteractArea = document.querySelector("#interact-area")
 let puzzleSpace = document.getElementById("interactive-puzzle")
 let currentScore = 0
 let perfectScore = 0
+let time = 0
 
 // The Generate Random Puzzle Button calls getPuzzleAtDifficulty() based on selected difficulty
 randomPuzzleButton.addEventListener("click", function(e) {
@@ -26,6 +27,7 @@ createPuzzleButton.addEventListener('click', function(e) {
     setTimeout(function(){
         removeLastPuzzle()
     }, 1000);
+    timeThisGame()
 });
 
 // The user's cursor is bumped to the next letter after each keystroke
@@ -137,8 +139,9 @@ function checkPuzzle(div) {
         if (item.className == "" || item[0].value.toUpperCase() == item.id) {
             i += 1
             if (i == collection.length) {
-                target.innerText = "Winner!"
+                target.innerText = "Winner!" + `   You solved the puzzle in ${time} seconds!`
                 target.id = 'result-area-win'
+                clearInterval(intervalId)
             } else if (wTarget != null) {
                 wTarget.innerText = "    You already won, try a new puzzle."
                 break
@@ -182,4 +185,19 @@ function clearResult() {
         wTarget.innerText = ""
         wTarget.id = 'result-area'
     }
+    let time = 0
+}
+
+// When a game starts (when forms are created)
+// Use set interval () to start a timer
+// When game ends, stop timer and display number
+// Assigning high score idea*
+let intervalId
+
+function timeThisGame() {
+    time = 0
+    intervalId = setInterval(function(){
+        time += 1
+        console.log(time)
+    }, 1000);
 }
